@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+	<style>
+		h1, h5,h3, th { text-align: center; }
+		table { margin: auto; font-family: Segoe UI; box-shadow: 10px 10px 5px #888; border: thin ridge grey; }
+		th { background: #0046c3; color: #fff; max-width: 400px; padding: 5px 10px; }
+		td { font-size: 11px; padding: 5px 20px; color: #000; }
+		tr { background: #b8d1f3; }
+		tr:nth-child(even) { background: #dae5f4; }
+		tr:nth-child(odd) { background: #b8d1f3; }
+	</style>
+</head>
+<body>
+   <div class="row">
+        <div class="col-md-12">
+			<div id="editor"></div>
+            <div class="widget-wrap material-table-widget" id="content">
+                <div class="widget-container margin-top-0">
+                    <div class="widget-content">
+                        <div class="data-action-bar">
+                            <div class="row">
+                                <div class="widget-header">
+                                        <h1>Heart Test Result</h1>
+                                        <h3>
+                                            Patient Heart Disease Status report sheet
+                                        </h3>
+                                </div>
+							</div>
+						</div>
+                        <table id="exportable-tbl" class="table foo-data-table-filterable table-striped" data-filter="#filter" data-filter-text-only="true" data-page-size="8" data-limit-navigation="3">
+                            <thead>
+                            <tr>
+                                <th data-hide="phone">
+                                    Attributes
+                                </th>
+                                <th  data-hide="phone">
+                                    Value
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Firstname</td>
+                                <td>{{hearttest.firstname}}</td></tr>
+							<tr>
+                                <td>Lastname</td>
+                                <td>{{hearttest.lastname}}</td>
+                                </tr>
+                            <tr>
+                                <td>Patient Identification Number</td>
+                                <td>{{hearttest.patientno}}</td>
+                              </tr>
+                            <tr>
+                                <td>Sex</td>
+								{% if hearttest.sex==0 %}
+                                <td >Male</td>
+								{% else %}
+								<td >Female</td>
+								{% endif %}
+							</tr>
+							<tr>
+                                <td>Age</td>
+                                <td>{{hearttest.age}}</td>
+                            </tr>
+                            <tr>
+                                <td>Resting Blood Pressure</td>
+                                <td>{{hearttest.trestbps}}</td>
+                              </tr>
+							<tr>
+                                <td>Thal</td>
+                                <td>{{thal[hearttest.thal]}}</td></tr>
+							<tr>
+                                <td>Serum Cholestoral</td>
+                                <td>{{hearttest.chol}}</td>
+                                </tr>
+                            <tr>
+                                <td>Chest Pain Type</td>
+                                <td>{{cp[hearttest.cp]}}</td>
+                            </tr>
+							<tr>
+                                <td>Fasting Blood Sugar</td>
+								{% if hearttest.fbs==1 %}
+                                <td >fasting blood sugar > 120 mg/dl</td>
+								{% else %}
+								<td >fasting blood sugar < 120 mg</td>
+								{% endif %}
+							</tr>
+							<tr>
+                                <td>Resting Electrocardiographic Results</td>
+                                <td>{{restecg[hearttest.restecg]}}</td>
+                                </tr>
+                            <tr>
+                                <td>Maximum Heart Rate Achieved</td>
+                                <td>{{hearttest.thalach}}</td>
+                            </tr>
+							<tr>
+                                <td>Exercise Induced Angina</td>
+                                <td>{{hearttest.exang}}</td></tr>
+							<tr>
+                                <td>ST depression induced by exercise relative to rest</td>
+                                <td>{{hearttest.oldpeak}}</td>
+                                </tr>
+                            <tr>
+                                <td>Slope of the Peak Exercise ST Segment</td>
+                                <td>{{slope[hearttest.slope]}}</td>
+                            </tr>
+							<tr>
+                                <td>Number of major vessels</td>
+                                <td>{{hearttest.ca}}</td></tr>
+							<tr>
+                                <td>Prediction of Heart Disease Status</td>
+								{% if hearttest.result==1 %}
+                                <td >Positive - Present of heart disease</td>
+								{% else %}
+								<td >Negative - Absence of heart disease</td>
+								{% endif %}
+                            </tr>
+                            <tfoot class="hide-if-no-paging">
+                            <tr>
+                                <td colspan="6" class="footable-visible">
+                                    <h5> Please note that, this report is for expert usage </h5>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	</body>
+</html>

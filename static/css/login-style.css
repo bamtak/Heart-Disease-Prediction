@@ -1,0 +1,322 @@
+body{
+	margin:0;
+	color:#6a6f8c;
+	background:#c8c8c8;
+	font:600 16px/18px 'Open Sans',sans-serif;
+}
+*,:after,:before{box-sizing:border-box}
+.clearfix:after,.clearfix:before{content:'';display:table}
+.clearfix:after{clear:both;display:block}
+a{color:inherit;text-decoration:none}
+
+.login-wrap{
+	width:100%;
+	margin:auto;
+	margin-top: 100px;
+	max-width:525px;
+	min-height:450px;
+	position:relative;
+	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+.login-html{
+	width:100%;
+	height:100%;
+	position:absolute;
+	padding:50px 70px 50px 70px;
+	background:rgba(40,57,101,.3);
+}
+.login-html .sign-in-htm,
+.login-html .sign-up-htm{
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	position:absolute;
+	-webkit-transform:rotateY(180deg);
+	        transform:rotateY(180deg);
+	-webkit-backface-visibility:hidden;
+	        backface-visibility:hidden;
+	-webkit-transition:all .4s linear;
+	transition:all .4s linear;
+}
+.login-html .sign-in,
+.login-html .sign-up,
+.login-form .group .check{
+	display:none;
+}
+.login-html .tab,
+.login-form .group .label,
+.login-form .group .button{
+	text-transform:uppercase;
+}
+.login-html .tab{
+	font-size:22px;
+	margin-right:15px;
+	padding-bottom:5px;
+	margin:0 15px 10px 0;
+	display:inline-block;
+	border-bottom:2px solid transparent;
+}
+.login-html .sign-in:checked + .tab,
+.login-html .sign-up:checked + .tab{
+	color:#fff;
+	border-color:#1161ee;
+}
+.login-form{
+	min-height:345px;
+	position:relative;
+	-webkit-perspective:1000px;
+	        perspective:1000px;
+	-webkit-transform-style:preserve-3d;
+	        transform-style:preserve-3d;
+}
+.login-form .group{
+	margin-bottom:15px;
+}
+.login-form .group .label,
+.login-form .group .input,
+.login-form .group .button{
+	width:100%;
+	color:#fff;
+	display:block;
+}
+.login-form .group .input,
+.login-form .group .button{
+	border:none;
+	padding:15px 20px;
+	border-radius:25px;
+	background:rgba(255,255,255,.1);
+}
+.login-form .group input[data-type="password"]{
+	text-security:circle;
+	-webkit-text-security:circle;
+}
+.login-form .group .label{
+	color:#aaa;
+	font-size:12px;
+}
+.login-form .group .button{
+	background:#1161ee;
+}
+.login-form .group label .icon{
+	width:15px;
+	height:15px;
+	border-radius:2px;
+	position:relative;
+	display:inline-block;
+	background:rgba(255,255,255,.1);
+}
+.login-form .group label .icon:before,
+.login-form .group label .icon:after{
+	content:'';
+	width:10px;
+	height:2px;
+	background:#fff;
+	position:absolute;
+	-webkit-transition:all .2s ease-in-out 0s;
+	transition:all .2s ease-in-out 0s;
+}
+.login-form .group label .icon:before{
+	left:3px;
+	width:5px;
+	bottom:6px;
+	-webkit-transform:scale(0) rotate(0);
+	        transform:scale(0) rotate(0);
+}
+.login-form .group label .icon:after{
+	top:6px;
+	right:0;
+	-webkit-transform:scale(0) rotate(0);
+	        transform:scale(0) rotate(0);
+}
+.login-form .group .check:checked + label{
+	color:#fff;
+}
+.login-form .group .check:checked + label .icon{
+	background:#1161ee;
+}
+.login-form .group .check:checked + label .icon:before{
+	-webkit-transform:scale(1) rotate(45deg);
+	        transform:scale(1) rotate(45deg);
+}
+.login-form .group .check:checked + label .icon:after{
+	-webkit-transform:scale(1) rotate(-45deg);
+	        transform:scale(1) rotate(-45deg);
+}
+.login-html .sign-in:checked + .tab + .sign-up + .tab + .login-form .sign-in-htm{
+	-webkit-transform:rotate(0);
+	        transform:rotate(0);
+}
+.login-html .sign-up:checked + .tab + .login-form .sign-up-htm{
+	-webkit-transform:rotate(0);
+	        transform:rotate(0);
+}
+
+.hr{
+	height:2px;
+	margin:60px 0 50px 0;
+	background:rgba(255,255,255,.2);
+}
+.foot-lnk{
+	text-align:center;
+}
+
+
+/* Form style start */
+
+
+.newform .info p {
+  text-align:center;
+  color: #999;
+  text-transform:none;
+  font-weight:600;
+  font-size:15px;
+  margin-top:2px
+}
+
+.newform .info i {
+  color:#F6AA93;
+}
+.newform form h1 {
+  font-size: 18px;
+  background: #F6AA93 none repeat scroll 0% 0%;
+  color: rgb(255, 255, 255);
+  padding: 10px 10px;
+  border-radius: 5px 5px 0px 0px;
+  margin: auto;
+  text-shadow: none; 
+  text-align:center;
+}
+
+.newform form {
+  border-radius: 5px;
+  max-width:800px;
+  width:100%;
+  margin: 5% auto;
+  background-color: #FFFFFF;
+  overflow: hidden;
+}
+
+.newform p span {
+  color: #F00;
+}
+
+.newform p {
+  margin: 0px;
+  font-weight: 500;
+  line-height: 2;
+  color:#333;
+}
+
+.newform h1 {
+  text-align:center; 
+  color: #666;
+  text-shadow: 1px 1px 0px #FFF;
+  margin:50px 0px 0px 0px
+}
+
+.newform input {
+  border-radius: 0px 5px 5px 0px;
+  border: 1px solid #eee;
+  margin-bottom: 15px;
+  width: 75%;
+  height: 40px;
+  float: left;
+  padding: 0px 15px;
+}
+
+.newform a {
+  text-decoration:inherit
+}
+
+.newform textarea {
+  border-radius: 0px 5px 5px 0px;
+  border: 1px solid #EEE;
+  margin: 0;
+  width: 75%;
+  height: 130px; 
+  float: left;
+  padding: 0px 15px;
+}
+
+.newform .form-group {
+  overflow: hidden;
+  clear: both;
+}
+
+.newform .icon-case {
+  width: 35px;
+  float: left;
+  border-radius: 5px 0px 0px 5px;
+  background:#eeeeee;
+  height:42px;
+  position: relative;
+  text-align: center;
+  line-height:40px;
+}
+
+.newform i {
+  color:#555;
+}
+
+.newform .contentform {
+  padding: 40px 30px;
+}
+
+.newform .bouton-contact{
+  background-color: #81BDA4;
+  color: #FFF;
+  text-align: center;
+  width: 100%;
+  border:0;
+  padding: 17px 25px;
+  border-radius: 0px 0px 5px 5px;
+  cursor: pointer;
+  margin-top: 40px;
+  font-size: 18px;
+}
+
+.newform .leftcontact {
+  width:49.5%; 
+  float:left;
+  border-right: 1px dotted #CCC;
+  box-sizing: border-box;
+  padding: 0px 15px 0px 0px;
+}
+
+.newform .rightcontact {
+  width:49.5%;
+  float:right;
+  box-sizing: border-box;
+  padding: 0px 0px 0px 15px;
+}
+
+.newform .validation {
+  display:none;
+  margin: 0 0 10px;
+  font-weight:400;
+  font-size:13px;
+  color: #DE5959;
+}
+
+.newform #sendmessage {
+  border:1px solid #fff;
+  display:none;
+  text-align:center;
+  margin:10px 0;
+  font-weight:600;
+  margin-bottom:30px;
+  background-color: #EBF6E0;
+  color: #5F9025;
+  border: 1px solid #B3DC82;
+  padding: 13px 40px 13px 18px;
+  border-radius: 3px;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.03);
+}
+
+.newform #sendmessage.show,.show  {
+  display:block;
+}
+.v-link-active {
+    color: #444;
+}

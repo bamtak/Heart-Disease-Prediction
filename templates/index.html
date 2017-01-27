@@ -1,0 +1,860 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>MEDICAL DIAGNOSTIC ASSISTANCE</title>
+    <link type="text/css" rel="stylesheet" href="/static/css/font-awesome.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/material-design-iconic-font.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/animate.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/layout.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/components.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/widgets.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/plugins.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/pages.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/bootstrap-extend.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/common.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/responsive.css">
+</head>
+<body class="leftbar-view">
+{% raw %}
+
+<div id="app">
+    <router-view :storage.sync="storage"></router-view>
+</div>
+
+<template id="login">
+<section class="login-container boxed-login">
+<div class="container">
+<div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
+<div class="login-form-container">
+    <form  method="post" class="j-forms" id="forms-login" novalidate>
+        <div class="login-form-content">
+		<h2 v-if="registered"> Login </h2>
+		<h2 v-else> Sign up </h2>
+            <!-- start login -->
+            <div class="unit">
+                <div class="input login-input">
+                    <label class="icon-left" for="login">
+                        <i class="zmdi zmdi-account"></i>
+                    </label>
+                    <input class="form-control login-frm-input"  type="text" id="login" name="login" placeholder="Username / Email" v-model="username">
+                </div>
+            </div>
+            <!-- end login -->
+
+            <!-- start password -->
+            <div class="unit">
+                <div class="input login-input">
+                    <label class="icon-left" for="password">
+                        <i class="zmdi zmdi-key"></i>
+                    </label>
+                    <input class="form-control login-frm-input"  type="password" id="password" name="password" placeholder="Password" v-model="password">
+						<span class="hint">
+							<a href="#" class="link">Forgot password?</a>
+						</span>
+                </div>
+            </div>
+            <!-- end password -->
+			
+			<div class="unit">
+                <div v-if="registered">
+                    <label > For new user, click <a href="#" @click="enableRegister" class="link">here</a> to register</label>	
+                </div>
+				<div v-else>
+                    <label > For registered user, click <a href="#" @click="enableLogin" class="link" >here</a> to login</label>	
+                </div>
+            </div>
+
+            <!-- start keep logged -->
+            <div class="unit">
+                <label class="checkbox">
+                    <input type="checkbox" name="logged" value="true" checked="">
+                    <i></i>
+                    Keep me logged in
+                </label>
+            </div>
+            <!-- end keep logged -->
+
+            <!-- start response from server -->
+            <div class="response" v-if="error" style="color:red;"><p>Invalid user/password</p></div>
+            <!-- end response from server -->
+
+
+
+        </div>
+        <div class="login-form-footer" v-if="registered">
+			<button type="submit" class="btn-block btn btn-primary" @click="login" >Sign in</button>
+        </div>
+		<div class="login-form-footer" v-else>
+			<button type="submit" class="btn-block btn btn-primary" @click="register" >Sign up</button>
+        </div>
+
+    </form>
+</div>
+</div>
+</div>
+<!--Footer Start Here -->
+<footer class="login-page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
+                <div class="footer-content">
+                    <span class="footer-meta">Crafted with&nbsp;<i class="fa fa-heart"></i>&nbsp;by&nbsp;<a href="http://zoft.tech/">zoft</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--Footer End Here -->
+</section>
+</template>
+
+<template id="headerh">
+<!--Topbar Start Here-->
+<header class="topbar clearfix" v-show="storage.userLoggedIn">
+    <!--Top Search Bar Start Here-->
+    <div class="top-search-bar">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="search-input-addon">
+                        <span class="addon-icon"><i class="zmdi zmdi-search"></i></span>
+                        <input type="text" class="form-control top-search-input" placeholder="Search">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Top Search Bar End Here-->
+    <!--Topbar Left Branding With Logo Start-->
+    <div class="topbar-left pull-left">
+        <div class="clearfix">
+            <ul class="left-branding pull-left clickablemenu ttmenu dark-style menu-color-gradient">
+                <li><span class="left-toggle-switch"><i class="zmdi zmdi-menu"></i></span></li>
+                <li>
+                    <div class="logo">
+                        <a href="index-2.html" title="Admin Template"><span style="font-size:25px; color:#fafafa;">MEDIC DA</span></a>
+                    </div>
+                </li>
+            </ul>
+            <!--Mobile Search and Rightbar Toggle-->
+            <ul class="branding-right pull-right">
+                <li><a href="#" class="btn-mobile-search btn-top-search"><i class="zmdi zmdi-search"></i></a></li>
+                <li><a href="#" class="btn-mobile-bar"><i class="zmdi zmdi-menu"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <!--Topbar Left Branding With Logo End-->
+</header>
+<!--Topbar End Here-->
+</template>
+
+<template id="sidebar">
+<!--Leftbar Start Here-->
+<aside class="leftbar" v-show="storage.userLoggedIn">
+    <div class="left-aside-container">
+        <div class="user-profile-container">
+            <div class="user-profile clearfix">
+                <div class="admin-user-thumb">
+                    <img src="/static/images/heart2.jpg" alt="admin">
+                </div>
+                <div class="admin-user-info">
+                    <ul>
+                        <li><h3>Welcome</h3></li>
+                        <li><a href="#">{{user}}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="admin-bar">
+                <ul>
+                    <li><a v-link="{name: 'login'}" @click="logOut"><i class="zmdi zmdi-power"></i>
+                    </a>
+                    </li>
+                    <li><a href="#"><i class="zmdi zmdi-account"></i>
+                    </a>
+                    </li>
+                    <li><a href="#"><i class="zmdi zmdi-key"></i>
+                    </a>
+                    </li>
+                    <li><a href="#"><i class="zmdi zmdi-settings"></i>
+                    </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul class="list-accordion tree-style">
+            <li class="list-title">Dashboard</li>
+            <li>
+                <a v-link="{name: 'hearttests'}"><i class="zmdi zmdi-view-dashboard"></i><span class="list-label">All test</span></a>
+				<a v-link="{name : 'newhearttest'}" ><i class="zmdi zmdi-view-dashboard"></i><span class="list-label">New Test</span></a>
+            </li>
+            <li>
+                <a href="#"><i class="zmdi zmdi-view-web"></i><span class="list-label">Settings</span></a>
+                <ul>
+                    <li><a href="">Profile</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</aside>
+<!--Leftbar End Here-->
+</template>
+
+<template id="newTest">
+
+<headerh :storage.sync="storage"></headerh>
+<sidebar :storage.sync="storage"></sidebar>
+
+<!--Page Container Start Here-->
+<section class="main-container">
+
+    <div class="container-fluid">
+        <div class="page-header filled full-block light">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>New Heart Test Form</h2>
+                    <p>Please enter the required details below to comfirm patient state of health. </p>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-page-breadcrumb">
+                        <li><a href="#">Home <i class="zmdi zmdi-chevron-right"></i></a></li>
+                        <li class="active-page"> New Test Page</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="widget-wrap">
+                    <div class="widget-header block-header margin-bottom-0 clearfix">
+                        <div class="pull-left">
+                            <h3>Require Details for checking heart disease status</h3>
+                        </div>
+                    </div>
+                    <div class="widget-container">
+                        <div class="widget-content">
+                            <div class="row">
+                                <div class="col-md-12">
+									<form class="j-forms" novalidate>
+
+										<div class="form-content">
+
+											<!-- start text password -->
+											<div class="row">
+												<div class="col-md-6 unit">
+													<label class="label">Firstname</label>
+													<div class="input">
+														<label class="icon-left" for="firstname">
+															<i class="fa fa-edit"></i>
+														</label>
+														<input class="form-control" type="text" placeholder="Patient Firstname" id="firstname" v-model="firstname">
+													</div>
+												</div>
+												<div class="col-md-6 unit">
+													<label class="label">Lastname</label>
+													<div class="input">
+														<label class="icon-left" for="lastname">
+															<i class="fa fa-edit"></i>
+														</label>
+														<input class="form-control" type="text" placeholder="Patient Lastname" id="lastname" v-model="lastname">
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-6 unit">
+													<label class="label">Patient Identification Number</label>
+													<div class="input">
+														<label class="icon-left" for="patientno">
+															<i class="fa fa-edit"></i>
+														</label>
+														<input class="form-control" placeholder="ID Number" type="text" v-model="patientno">
+													</div>
+												</div>
+												<div class="col-md-6 unit">
+													<label class="label">Sex</label>
+													<label class="input select">
+														<select class="form-control" id="sex" v-model="sex">
+															<option value="none">Select Sex</option>
+															<option value="0">Male</option>
+															<option value="1">Female</option>
+														</select>
+														<i></i>
+													</label>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-6 unit">
+													<label class="label">Age</label>
+													<div class="input">
+														<label class="icon-left" for="age">
+															<i class="fa fa-birthday-cake"></i>
+														</label>
+														<input class="form-control" placeholder="Age" type="number" min="0" v-model="age">
+													</div>
+												</div>
+												<div class="col-md-6 unit">
+													<label class="label">Thal</label>
+													<label class="input select">
+														<select class="form-control" id="thal" v-model="thal">
+															<option value="none">Select</option>
+															<option value="3.0">Normal </option>
+															<option value="6.0">Fixed Defect</option>
+															<option value="7.0">Reversable Defect</option>
+														</select>
+														<i></i>
+													</label>
+												</div>
+											</div>
+											<!-- end text password -->
+
+											<!-- start email url -->
+											<div class="row">
+												<div class="col-md-6 unit">
+													<label class="label">Resting Blood Pressure</label>
+													<div class="input">
+														<label class="icon-left" for="trestbps">
+															<i class="fa fa-plus"></i>
+														</label>
+														<input class="form-control" placeholder="restbps in mm Hg" type="number" min="0" v-model="trestbps" id="trestbps">
+													</div>
+												</div>
+												<div class="col-md-6 unit">
+													<label class="label">Serum Cholestoral</label>
+													<div class="input">
+														<label class="icon-left" for="chol">
+															<i class="fa fa-plus"></i>
+														</label>
+														<input class="form-control" placeholder="serum cholestoral in mg/dl " type="number" min="0" v-model="chol" id="chol">
+													</div>
+												</div>
+											</div>
+											
+											<div class="row">
+												<div class="col-md-6 unit">
+													<label class="label">Chest Pain Type </label>
+													<label class="input select">
+														<select class="form-control" id="cp" v-model="cp">
+															<option value="none">Select Chest Pain Type</option>
+															<option value="1.0">Typical angina</option>
+															<option value="2.0">Atypical angina</option>
+															<option value="3.0">Non-anginal pain</option>
+															<option value="4.0">Asymptomatic</option>
+														</select>
+														<i></i>
+													</label>
+												</div>
+												<div class="col-md-6 unit">
+													<label class="label">Fasting Blood Sugar</label>
+													<div class="input">
+														<label class="icon-left" for="fbs">
+															<i class="fa fa-plus"></i>
+														</label>
+														<input class="form-control" placeholder="fasting blood sugar mg/dl" type="number" min="0" v-model="fbs" id="fbs">
+													</div>
+												</div>
+											</div>
+											
+											<div class="row">
+												<div class="col-md-6 unit">
+													<label class="label">Resting Electrocardiographic Results</label>
+													<label class="input select">
+														<select class="form-control" id="restecg" v-model="restecg">
+															<option value="none">Select restecg result</option>
+															<option value="0.0">Normal</option>
+															<option value="1.0">Having ST-T wave abnormality</option>
+															<option value="2.0">Showing probable or definite left ventricular hypertrophy by Estes' criteria</option>
+														</select>
+														<i></i>
+													</label>
+												</div>
+												<div class="col-md-6 unit">
+													<label class="label">Maximum Heart Rate Achieved</label>
+													<div class="input">
+														<label class="icon-left" for="thalach">
+															<i class="fa fa-plus"></i>
+														</label>
+														<input class="form-control" placeholder="fasting blood sugar mg/dl" type="number" min="0" v-model="thalach" id="thalach">
+													</div>
+												</div>
+											</div>
+											
+											<div class="row">
+												<div class="col-md-6 unit">
+													<label class="label">Exercise Induced Angina</label>
+													<label class="input select">
+														<select class="form-control" id="exang" v-model="exang">
+															<option value="none">Presence of exercise induced angina</option>
+															<option value="0.0">No</option>
+															<option value="1.0">Yes</option>
+														</select>
+														<i></i>
+													</label>
+												</div>
+												<div class="col-md-6 unit">
+													<label class="label">ST depression induced by exercise relative to rest</label>
+													<div class="input">
+														<label class="icon-left" for="oldpeak">
+															<i class="fa fa-plus"></i>
+														</label>
+														<input class="form-control" placeholder="ST depression induced" type="number" min="0" v-model="oldpeak" step="0.1">
+													</div>
+												</div>
+											</div>
+											
+											<div class="row">
+												<div class="col-md-6 unit">
+													<label class="label">Slope of the Peak Exercise ST Segment</label>
+													<label class="input select">
+														<select class="form-control" id="slope" v-model="slope">
+															<option value="none">Select</option>
+															<option value="1.0">Upsloping </option>
+															<option value="2.0">Flat</option>
+															<option value="3.0">Downsloping</option>
+														</select>
+														<i></i>
+													</label>
+												</div>
+												<div class="col-md-6 unit">
+													<label class="label">Number of major vessels</label>
+													<div class="input">
+														<label class="icon-left" for="ca">
+															<i class="fa fa-plus"></i>
+														</label>
+														<input class="form-control" placeholder=" (0-3) colored by flourosopy " type="number" min="0" v-model="ca" step="0.1">
+													</div>
+												</div>
+											</div>
+											<div class="form-footer">
+												<button type="submit" class="btn btn-success primary-btn" @click="addHeartTest">Submit</button>
+												<button type="reset" class="btn btn-danger secondary-btn">Reset</button>
+											</div>
+											<!-- end email url -->
+
+
+											
+											<!-- end /.footer -->
+											
+										</div>
+
+									</form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+        </div>
+
+    </div>
+    <!--Footer Start Here -->
+    <footer class="footer-container">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="footer-left">
+                        <span>© 2017 <a href="http://zoft.tech/">zoft</a></span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="footer-right">
+                        <span class="footer-meta">Crafted with&nbsp;<i class="fa fa-heart"></i>&nbsp;by&nbsp;<a href="http://zoft.tech/">zoft-tech</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--Footer End Here -->
+</section>
+
+</template>
+
+<template id="allTests">
+
+<headerh :storage.sync="storage"></headerh>
+<sidebar :storage.sync="storage"></sidebar>
+<!--Page Container End Here-->
+
+<section class="main-container">
+<div class="container-fluid">
+<div class="page-header filled full-block light">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Heart Tests</h2>
+        </div>
+        <div class="col-md-6">
+            <ul class="list-page-breadcrumb">
+                <li><a href="#">Home <i class="zmdi zmdi-chevron-right"></i></a></li>
+                <li><a href="#">Heart Test <i class="zmdi zmdi-chevron-right"></i></a></li>
+                <li class="active-page"> All Tests</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget-wrap material-table-widget">
+
+                <div class="widget-container margin-top-0">
+                    <div class="widget-content">
+                        <div class="data-action-bar">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="widget-header">
+                                        <h3>Heart Test Carried Out</h3>
+                                        <p>
+                                            Summary of all tests store in the database
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="data-align-right">
+                                        <div class="tbl-action-toolbar">
+                                            <ul>
+                                                <li><a href="#clear" class="clear-filter btn btn-link" title="clear filter">Clear Filter</a></li>
+                                                <li class="dropdown">
+                                                    <a href="#" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><i class="zmdi zmdi-archive"></i> Export</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="#" onclick="$('#exportable-tbl').tableExport({type:'json',escape:'false'});"> <i class="fa fa-file-o"></i> JSON</a></li>
+                                                        <li><a href="#" onclick="$('#exportable-tbl').tableExport({type:'excel',escape:'false'});"> <i class="fa fa-file-excel-o"></i> XLS</a></li>
+                                                        <li><a href="#" onclick="$('#exportable-tbl').tableExport({type:'txt',escape:'false'});"> <i class="fa fa-file-text-o"></i> TXT</a></li>
+                                                        <li><a href="#" onclick="$('#exportable-tbl').tableExport({type:'powerpoint',escape:'false'});"> <i class="fa fa-file-powerpoint-o"></i> PowerPoint</a></li>
+                                                        <li><a href="#" onclick="$('#exportable-tbl').tableExport({type:'pdf',pdfFontSize:'7',escape:'false'});"> <i class="fa fa-file-pdf-o"></i> PDF</a></li>
+
+
+                                                    </ul>
+                                                </li>
+                                                <li><a v-link="{name: 'newhearttest'}" class="btn add-row btn-primary">Add New</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-filter-header">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <span class="tfh-label" >Search: </span>
+                                            <input v-model="filterKey" class="form-control" id="filter" type="text"/>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <span class="tfh-label">By Status: </span>
+                                            <select class="filter-status  form-control" v-model="filterKey">
+                                                <option value="Negative">Negative</option>
+                                                <option value="Positive">Positive</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table id="exportable-tbl" class="table foo-data-table-filterable table-striped" data-filter="#filter" data-filter-text-only="true" data-page-size="8" data-limit-navigation="3">
+                            <thead>
+                            <tr>
+								<th data-sort-ignore="true">
+                                    Patient ID
+                                </th>
+                                <th data-sort-ignore="true">
+                                    First Name
+                                </th>
+                                <th  data-hide="phone">
+                                    Last Name
+                                </th>
+                                <th  data-hide="phone">
+                                    Sex
+                                </th>
+                                <th  data-hide="phone">
+                                    Age
+                                </th>
+                                <th>
+                                    Heart Disease Status
+                                </th>
+                                <th  data-sort-ignore="true" data-hide="phone"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="heartTest in heartTests | filterBy filterKey" >
+									<td><a v-link="{name: 'hearttest', params: {id: heartTest.id}}">{{heartTest.id}}</a></td>
+									<td>{{heartTest.firstname}}</td>
+									<td>{{heartTest.lastname}}</td>
+									<td v-if="heartTest['sex']==1">Female</td>
+									<td v-else>Male</td>
+									<td>{{heartTest.age}}</td>
+									<td v-if="heartTest.result==1"><span class="label label-danger"  title="Positive">Positive</span></td>
+									<td v-else><span class="label label-success"  title="Negative">Negative</span></td>
+									<td class="td-right"><a class="row-edit" href="#"><span class="zmdi zmdi-edit"></span></a> <a class="row-delete" href="#"><span class="zmdi zmdi-close"></span></a></td>
+								
+							</tr>
+                            </tbody>
+                            <tfoot class="hide-if-no-paging">
+                            <tr>
+                                <td colspan="6" class="footable-visible">
+                                    <div class="pagination pagination-centered"></div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!--Footer Start Here -->
+    <footer class="footer-container">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="footer-left">
+                        <span>© 2017 <a href="http://zoft.tech/">zoft</a></span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="footer-right">
+                        <span class="footer-meta">Crafted with&nbsp;<i class="fa fa-heart"></i>&nbsp;by&nbsp;<a href="http://zoft.tech/">zoft-tech</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--Footer End Here -->
+</section>
+</template>
+
+<template id="testPage">
+
+<headerh :storage.sync="storage"></headerh>
+<sidebar :storage.sync="storage"></sidebar>
+<!--Page Container End Here-->
+
+<section class="main-container">
+<div class="container-fluid">
+<div class="page-header filled full-block light">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Heart Test</h2>
+        </div>
+        <div class="col-md-6">
+            <ul class="list-page-breadcrumb">
+                <li><a href="#">Home <i class="zmdi zmdi-chevron-right"></i></a></li>
+                <li><a href="#">Heart Test<i class="zmdi zmdi-chevron-right"></i></a></li>
+                <li class="active-page"> Test Page</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+			<div id="editor"></div>
+            <div class="widget-wrap material-table-widget" id="content">
+                <div class="widget-container margin-top-0">
+                    <div class="widget-content">
+                        <div class="data-action-bar">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="widget-header">
+                                        <h3>Heart Test Result</h3>
+                                        <p>
+                                            Patient Heart Disease Status report sheet
+                                        </p>
+                                    </div>
+                                </div>
+								<div class="col-md-6">
+                                    <div class="data-align-right">
+                                        <div class="tbl-action-toolbar">
+                                            <ul>
+                                                <li><a href="#clear" class="clear-filter btn btn-link" title="clear filter">Clear Filter</a></li>
+                                                <li class="dropdown">
+                                                    <a href="#" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><i class="zmdi zmdi-archive"></i> Export</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="#" onclick="$('#exportable-tbl').tableExport({type:'powerpoint',escape:'false'});"> <i class="fa fa-file-powerpoint-o"></i> PowerPoint</a></li>
+                                                        <li><a href="#" @click="createPDF"> <i class="fa fa-file-pdf-o"></i> PDF</a></li>
+
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+							</div>
+						</div>
+                        <table id="exportable-tbl" class="table foo-data-table-filterable table-striped" data-filter="#filter" data-filter-text-only="true" data-page-size="8" data-limit-navigation="3">
+                            <thead>
+                            <tr>
+                                <th data-hide="phone">
+                                    Attributes
+                                </th>
+                                <th  data-hide="phone">
+                                    Value
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Firstname</td>
+                                <td>{{hearttest.firstname}}</td></tr>
+							<tr>
+                                <td>Lastname</td>
+                                <td>{{hearttest.lastname}}<td>
+                                </tr>
+                            <tr>
+                                <td>Patient Identification Number</td>
+                                <td>{{hearttest.patientno}}</td>
+                              </tr>
+                            <tr>
+                                <td>Sex</td>
+                                <td v-if="hearttest['sex']==0">Male</td>
+								<td v-else>Female</td>
+								</tr>
+							<tr>
+                                <td>Age</td>
+                                <td>{{hearttest.age}}</td>
+                                </tr>
+                            <tr>
+                                <td>Resting Blood Pressure</td>
+                                <td>{{hearttest.trestbps}}</td>
+                              </tr>
+							<tr>
+                                <td>Thal</td>
+                                <td>{{thal[hearttest.thal]}}</td></tr>
+							<tr>
+                                <td>Serum Cholestoral</td>
+                                <td>{{hearttest.chol}}</td>
+                                </tr>
+                            <tr>
+                                <td>Chest Pain Type</td>
+                                <td>{{cp[hearttest.cp]}}</td>
+                            </tr>
+							<tr>
+                                <td>Fasting Blood Sugar</td>
+                                <td v-if="hearttest.fbs==1">fasting blood sugar > 120 mg/dl</td>
+								<td v-else>fasting blood sugar < 120 mg<span>/</span>dl </td>
+							</tr>
+							<tr>
+                                <td>Resting Electrocardiographic Results</td>
+                                <td>{{restecg[hearttest.restecg]}}</td>
+                                </tr>
+                            <tr>
+                                <td>Maximum Heart Rate Achieved</td>
+                                <td>{{hearttest.thalach}}</td>
+                            </tr>
+							<tr>
+                                <td>Exercise Induced Angina</td>
+                                <td>{{hearttest.exang}}</td></tr>
+							<tr>
+                                <td>ST depression induced by exercise relative to rest</td>
+                                <td>{{hearttest.oldpeak}}</td>
+                                </tr>
+                            <tr>
+                                <td>Slope of the Peak Exercise ST Segment</td>
+                                <td>{{slope[hearttest.slope]}}</td>
+                            </tr>
+							<tr>
+                                <td>Number of major vessels</td>
+                                <td>{{hearttest.ca}}</td></tr>
+							<tr>
+                                <td>Heart Disease Status</td>
+								<td v-if="hearttest.result==1">Positive - Present of heart disease</td>
+                                <td v-else>Negative - Absence of heart disease</td>
+                            </tr>
+                            <tfoot class="hide-if-no-paging">
+                            <tr>
+                                <td colspan="6" class="footable-visible">
+                                    <div class="pagination pagination-centered"></div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!--Footer Start Here -->
+    <footer class="footer-container">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="footer-left">
+                        <span>© 2017 <a href="http://zoft.tech/">zoft</a></span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="footer-right">
+                        <span class="footer-meta">Crafted with&nbsp;<i class="fa fa-heart"></i>&nbsp;by&nbsp;<a href="http://zoft.tech/">zoft-tech</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--Footer End Here -->
+</section>
+</template>
+<!--Rightbar End Here-->
+
+{% endraw %}
+
+<script src="/static/js/lib/jquery.js"></script>
+<script src="/static/js/lib/jquery-migrate.js"></script>
+<script src="/static/js/lib/bootstrap.js"></script>
+<script src="/static/js/lib/jquery.ui.js"></script>
+<script src="/static/js/lib/jRespond.js"></script>
+<script src="/static/js/lib/nav.accordion.js"></script>
+<script src="/static/js/lib/hover.intent.js"></script>
+<script src="/static/js/lib/hammerjs.js"></script>
+<script src="/static/js/lib/jquery.hammer.js"></script>
+<script src="/static/js/lib/jquery.fitvids.js"></script>
+<script src="/static/js/lib/scrollup.js"></script>
+<script src="/static/js/lib/smoothscroll.js"></script>
+<script src="/static/js/lib/jquery.slimscroll.js"></script>
+<script src="/static/js/lib/jquery.syntaxhighlighter.js"></script>
+<script src="/static/js/lib/velocity.js"></script>
+<script src="/static/js/lib/smart-resize.js"></script>
+
+<!--Tables-->
+<script src="/static/js/lib/footable.all.js"></script>
+
+<!--Data Tables-->
+<script src="/static/js/lib/jquery.dataTables.js"></script>
+<script src="/static/js/lib/dataTables.responsive.js"></script>
+<script src="/static/js/lib/dataTables.tableTools.js"></script>
+<script src="/static/js/lib/dataTables.bootstrap.js"></script>
+
+<!--Exportable Data Tables-->
+<script src="/static/js/lib/tableExport.js"></script>
+<script src="/static/js/lib/jquery.base64.js"></script>
+<script src="/static/js/lib/sprintf.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+<script src="/static/js/lib/base64.js"></script>
+<script src="/static/js/lib/html2canvas.js"></script>
+
+
+<!--Forms-->
+<script src="/static/js/lib/jquery.maskedinput.js"></script>
+<script src="/static/js/lib/jquery.validate.js"></script>
+<script src="/static/js/lib/jquery.form.js"></script>
+
+<!--Select2-->
+<script src="/static/js/lib/select2.full.js"></script>
+<script src="/static/js/lib/j-forms.js"></script>
+<script src="/static/js/apps.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/0.7.10/vue-router.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.js"></script>
+<script src="/static/js/app.js"></script>
+</body>
+
+</html>
