@@ -46,8 +46,11 @@ There are 2 approach to runjing the application. This can be run using Docker or
 	
 	
 Using Docker
-	1.Build Docker Image: 'docker build -t medic-da .'
-	2.Run application: 'docker run -d -p 5002:5002 flask-sample-one
-	 * from the browser go to localhost:5002
+	1. Install Docker in your machine
+	1. Move to directory where docker project is stored
+	2. Build Docker Image: 'docker build -t medic-da .'
+	3. Run application: 'docker run -d -p 5002:5002 medic-da
+	 * from the browser go to 192.168.99.100:5002
+	 * Please note 192.168.99.100 is my docker host IP
 
 Enjoy...

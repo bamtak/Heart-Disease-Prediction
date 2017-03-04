@@ -137,7 +137,7 @@
                 <li><span class="left-toggle-switch"><i class="zmdi zmdi-menu"></i></span></li>
                 <li>
                     <div class="logo">
-                        <a href="index-2.html" title="Admin Template"><span style="font-size:25px; color:#fafafa;">MEDIC DA</span></a>
+                        <a href="#" title="Admin Template"><span style="font-size:25px; color:#fafafa;">MEDIC DA</span></a>
                     </div>
                 </li>
             </ul>
@@ -174,7 +174,7 @@
                     <li><a v-link="{name: 'login'}" @click="logOut"><i class="zmdi zmdi-power"></i>
                     </a>
                     </li>
-                    <li><a href="#"><i class="zmdi zmdi-account"></i>
+                    <!--<li><a href="#"><i class="zmdi zmdi-account"></i>
                     </a>
                     </li>
                     <li><a href="#"><i class="zmdi zmdi-key"></i>
@@ -182,7 +182,7 @@
                     </li>
                     <li><a href="#"><i class="zmdi zmdi-settings"></i>
                     </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -191,12 +191,6 @@
             <li>
                 <a v-link="{name: 'hearttests'}"><i class="zmdi zmdi-view-dashboard"></i><span class="list-label">All test</span></a>
 				<a v-link="{name : 'newhearttest'}" ><i class="zmdi zmdi-view-dashboard"></i><span class="list-label">New Test</span></a>
-            </li>
-            <li>
-                <a href="#"><i class="zmdi zmdi-view-web"></i><span class="list-label">Settings</span></a>
-                <ul>
-                    <li><a href="">Profile</a></li>
-                </ul>
             </li>
         </ul>
     </div>
@@ -518,7 +512,6 @@
                                     <div class="data-align-right">
                                         <div class="tbl-action-toolbar">
                                             <ul>
-                                                <li><a href="#clear" class="clear-filter btn btn-link" title="clear filter">Clear Filter</a></li>
                                                 <li class="dropdown">
                                                     <a href="#" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><i class="zmdi zmdi-archive"></i> Export</a>
                                                     <ul class="dropdown-menu">
@@ -545,13 +538,6 @@
                                         <div class="col-md-6 col-sm-6">
                                             <span class="tfh-label" >Search: </span>
                                             <input v-model="filterKey" class="form-control" id="filter" type="text"/>
-                                        </div>
-                                        <div class="col-md-6 col-sm-6">
-                                            <span class="tfh-label">By Status: </span>
-                                            <select class="filter-status  form-control" v-model="filterKey">
-                                                <option value="Negative">Negative</option>
-                                                <option value="Positive">Positive</option>
-                                            </select>
                                         </div>
                                     </div>
                                 </div>

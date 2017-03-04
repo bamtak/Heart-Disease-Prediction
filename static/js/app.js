@@ -1,12 +1,12 @@
 (function() {
-	
-	
+
+
 
     // Components
 
     // Pages
-	
-	
+
+
     var Login = Vue.extend({
         template: '#login',
         props: ['storage'],
@@ -99,12 +99,12 @@
 					function (error) {
 						console.log(error);
 					});
-                
+
 			}
         }
     });
 
-	
+
     var Sidebar = Vue.extend({
         template: '#sidebar',
         props: ['storage'],
@@ -124,7 +124,7 @@
             }
         }
     });
-	
+
 
     var Hearderh = Vue.extend({
         template: '#headerh',
@@ -228,10 +228,9 @@
                                 created_at : response.data.created_at
                             };
                         component.storage.user.data.heartTests.push(HeartTest);
-						transition.to.params.id = response.data.id;
 						router.go('/hearttests/'+response.data.id);
                     }
-					
+
                 },
                 function (error) {
 					if(response.data=='Unauthorized Access') {
@@ -245,7 +244,7 @@
 			sidebar: Sidebar
         }
     });
-	
+
     var HeartTests = Vue.extend({
         template: '#allTests',
         props: ['storage'],
@@ -259,7 +258,7 @@
             headerh: Hearderh,
 			sidebar: Sidebar
         }
-		
+
     });
 
     var HeartTest = Vue.extend({
@@ -288,7 +287,7 @@
 				thal: {3:'Normal',6:'Fixed Defect',7:'Reversable Defect'},
 				restecg: {0:"Normal",1:"Having ST-T wave abnormality",2:"Showing probable or definite left ventricular hypertrophy by Estes' criteria"},
 				slope : {1:'Upsloping',2:'Flat',3:'Downsloping'},
-				id : null									
+				id : null
             };
         },
 		components: {
