@@ -1,4 +1,4 @@
-##End to End Machine Learning Application for predicting heart disease
+## End to End Machine Learning Application for predicting heart disease
 
 ### Medic DA is an application developed in python for predicting heart disease using machine learning
 The project is divided into three part
