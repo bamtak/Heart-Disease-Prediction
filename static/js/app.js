@@ -1,3 +1,4 @@
+
 (function() {
 
 
@@ -5,7 +6,7 @@
     // Components
 
     // Pages
-
+    Vue.use(VeeValidate)
 
     var Login = Vue.extend({
         template: '#login',

@@ -40,7 +40,7 @@ def verify_password(username_or_token, password):
 
 @app.route('/')
 def start():
-    return render_template('index.html')
+    return render_template('index1.html')
 
 
 @app.route('/token')
@@ -74,7 +74,7 @@ def new_user():
 def get_user(username):
     user = session.query(User).filter_by(username = username).first()
     if not user:
-        abort(400)
+        jsonify({'AuthenticationError': username})
     return jsonify({ 'id':user.id, 'username': user.username })
 
 @app.route('/api/v1/hearttests', methods = ['GET', 'POST'])
